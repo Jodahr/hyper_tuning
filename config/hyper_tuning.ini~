@@ -1,0 +1,8 @@
+[Paths]
+data: ../input/iris.pkl
+model: ../input/iris_model.pkl
+
+[Data]
+type: pickle
+label: species
+format: dataframe

@@ -1,0 +1,23 @@
+{
+  "rf__criterion": {
+    "type": "choice",
+    "value": [
+      "gini",
+      "entropy"
+    ]
+  },
+  "rf__max_depth": {
+    "type": "uniform",
+    "value": [
+      0.66,
+      1.0
+    ]
+  },
+  "rf__min_samples_leaf": {
+    "type": "randint",
+    "value": [
+      1,
+      20
+    ]
+  }
+}
