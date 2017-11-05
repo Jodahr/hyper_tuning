@@ -7,6 +7,11 @@ import params as pm
 import data as d
 import optimize as om
 from sklearn.preprocessing import LabelBinarizer
+import numpy as np
+from geographiclib.geodesic import Geodesic
+import math
+geod = Geodesic.WGS84
+
 
 # parser (still needs to be finalized)
 def parse():

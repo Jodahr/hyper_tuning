@@ -1,5 +1,5 @@
 from hyperopt import hp
-
+import numpy as np
 
 # for more complex search spaces
 # here you can also define different models

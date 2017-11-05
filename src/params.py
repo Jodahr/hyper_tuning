@@ -5,10 +5,12 @@ from hyperopt import hp
 import sys
 import parameter_space as ps
 import numpy as np
+import dill
 
 
 def loadModel(modelpath):
-    model = joblib.load(modelpath)
+    # model = joblib.load(modelpath)
+    model = dill.load(open(modelpath, 'rb'))
     return model
     
 

@@ -1,10 +1,13 @@
 from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 import pandas as pd
+import numpy as np
+import dill
 
 
 def getData(dataPath, label):
-    data = joblib.load(dataPath)
+    # data = joblib.load(dataPath)
+    data = dill.load(open(dataPath, 'rb'))
     y = data[label]
     X = data.drop(label, axis=1)
     X_train, X_test, y_train, y_test = train_test_split(X, y,

@@ -3,6 +3,10 @@ from sklearn.model_selection import cross_val_score, KFold
 from hyperopt import fmin, tpe, Trials, space_eval
 import pickle
 from sklearn.metrics import roc_auc_score
+import numpy as np
+from geographiclib.geodesic import Geodesic
+import math
+geod = Geodesic.WGS84
 
 
 class Search:
@@ -43,7 +47,7 @@ class Search:
 
     def run_trials(self):
         trials_step = 1
-        max_trials = 5
+        max_trials = 3
         try:
             self.trials = pickle.load(open("../output/my_model.hyperopt",
                                       "rb"))
@@ -67,10 +71,13 @@ class Search:
         with open("../output/my_model.hyperopt", "wb") as f:
             pickle.dump(self.trials, f)
 
-    def inf_search(self):
+    def inf_search(self, n=200):
         try:
-            while True:
+            i = 0
+            while i < n:
+                print("run {}/{}".format(i, n))
                 self.run_trials()
+                i += 1
         except KeyboardInterrupt:
             #print(self.trials.best_trial)
             #print(self.trials.results)
