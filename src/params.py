@@ -28,8 +28,8 @@ def parameterSpace(paramsFile):
             space[parameter] = hp.choice(parameter, option['value'])
         elif option['type'] == 'uniform':
             print(option['value'])
-            #space[parameter] = hp.uniform(parameter, option['value'][0],
-            #                              option['value'][1])
+            space[parameter] = hp.uniform(parameter, option['value'][0],
+                                          option['value'][1])
         elif option['type'] == 'randint':
             minimum = option['value']['min']
             maximum = option['value']['max']
