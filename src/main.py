@@ -6,7 +6,7 @@ import logging
 import params as pm
 import data as d
 import optimize as om
-
+from sklearn.preprocessing import LabelBinarizer
 
 # parser (still needs to be finalized)
 def parse():
@@ -42,6 +42,8 @@ def getConfigs():
     configDict['dataType'] = configSectionMap(config, "Data")['type']
     configDict['dataLabel'] = configSectionMap(config, "Data")['label']
     configDict['dataFormat'] = configSectionMap(config, "Data")['format']
+    configDict['classification'] = configSectionMap(config,
+                                                    "Data")['classification']
     return configDict
 
 
@@ -53,6 +55,8 @@ def main():
     model = pm.loadModel(modelPath)
     dataPath = configDict['dataPath']
     label = configDict['dataLabel']
+    dataFormat = configDict['dataFormat']
+    classification = configDict['classification']
     data = d.getData(dataPath, label)
     # print(data['train'][0])
     # pm.printModelParams(model)
@@ -62,7 +66,9 @@ def main():
     space = pm.parameterSpace("../input/parameter_space.json")
     X = data['train'][0]
     y = data['train'][1]
-    y = y.apply(lambda x: 0 if x == 2 else x)
+    if classification == 'multiclass':
+        y = LabelBinarizer().fit_transform(y)
+    #y = y.apply(lambda x: 0 if x == 2 else x) # for binary classification
     search = om.Search(model, space, X, y)
     #search.run()
     search.inf_search()
