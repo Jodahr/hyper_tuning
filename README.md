@@ -30,3 +30,13 @@ The remaining congifs can be set in a init file.
 * https://github.com/hyperopt/hyperopt/issues/267
 * https://github.com/steventhornton/Hyperparameter-Tuning-with-hyperopt-in-Python
 * https://github.com/hyperopt/hyperopt/wiki/FMin
+
+## ideas
+* try to add sth similar for spark models
+* add multiclass option
+* add unsupervised learning
+* integrate hyperopt-sklearn
+* use parser arguments in the code
+* create a output folder containing trials and the best trained model
+* generate plots and save them as serialized matplotlib objects
+* use more OOP instead of so many functions
