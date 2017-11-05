@@ -7,6 +7,7 @@ import params as pm
 import data as d
 import optimize as om
 
+
 # parser (still needs to be finalized)
 def parse():
     parser = argparse.ArgumentParser(description='my parser')

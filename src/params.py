@@ -3,6 +3,7 @@ import json
 import pprint
 from hyperopt import hp
 import sys
+import parameter_space as ps
 
 
 def loadModel(modelpath):
@@ -38,4 +39,5 @@ def parameterSpace(paramsFile):
             print("hello")
         else:
             print("option not recognized.", file=sys.stderr)
+    space = ps.complexSpace(space)
     return space
