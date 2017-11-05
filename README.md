@@ -29,3 +29,4 @@ The remaining congifs can be set in a init file.
 
 * https://github.com/hyperopt/hyperopt/issues/267
 * https://github.com/steventhornton/Hyperparameter-Tuning-with-hyperopt-in-Python
+* https://github.com/hyperopt/hyperopt/wiki/FMin
