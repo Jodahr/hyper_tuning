@@ -29,9 +29,10 @@ class Search:
         best = fmin(self.objective,
                     self.space,
                     algo=tpe.suggest,
-                    max_evals=250,
+                    max_evals=50,
                     trials=trials,
                     verbose=True)
         best_params = space_eval(self.space, best)
+        print(trials.best_trial)
         print(best_params)
         return best_params
