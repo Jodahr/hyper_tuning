@@ -47,5 +47,6 @@ def parameterSpace(paramsFile):
             print("hello")
         else:
             print("option not recognized.", file=sys.stderr)
-    space = ps.complexSpace(space)
+    # add some flag to use it
+    #space = ps.complexSpace(space)
     return space
