@@ -40,4 +40,5 @@ The remaining congifs can be set in a init file.
 * create a output folder containing trials and the best trained model
 * generate plots and save them as serialized matplotlib objects
 * use more OOP instead of so many functions
-* filename for hyperopt trial object needs to be changed when input is changed; so, use argparser for that purpose 
+* filename for hyperopt trial object needs to be changed when input is changed; so, use argparser for that purpose
+* change your print commands to print to stderr or logger
