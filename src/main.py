@@ -66,10 +66,14 @@ def main():
     space = pm.parameterSpace("../input/parameter_space.json")
     X = data['train'][0]
     y = data['train'][1]
+    X_test = data['test'][0]
+    y_test = data['test'][1]
     if classification == 'multiclass':
         y = LabelBinarizer().fit_transform(y)
-    #y = y.apply(lambda x: 0 if x == 2 else x) # for binary classification
-    search = om.Search(model, space, X, y)
+        y_test = LabelBinarizer().fit_transform(y_test)
+    y = y.apply(lambda x: 0 if x == 2 else x)  # for binary classification
+    y_test = y_test.apply(lambda x: 0 if x == 2 else x)  # for binary classification
+    search = om.Search(model, space, X, y, X_test, y_test)
     #search.run()
     search.inf_search()
     #print(search.space)
