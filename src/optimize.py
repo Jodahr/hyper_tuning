@@ -1,6 +1,7 @@
 # import params as pm
 from sklearn.model_selection import cross_val_score, KFold
 from hyperopt import fmin, tpe, Trials, space_eval
+import pickle
 
 
 class Search:
@@ -10,6 +11,8 @@ class Search:
         self.X = X
         self.y = y
         self.score = score
+        self.trial = None
+        self.best_model = None
         
     def objective(self, params):
         print("\n1\n")
@@ -36,3 +39,36 @@ class Search:
         print(trials.best_trial)
         print(best_params)
         return best_params
+
+    def run_trials(self):
+        trials_step = 1
+        max_trials = 5
+
+        try:
+            trials = pickle.load(open("../output/my_model.hyperopt"), "rb")
+            print("found and load\n")
+            max_trials = len(trials.trials) + trials_step
+            print("Rerunning from {} trials to {} (+{}) trials"
+                  .format(len(trials.trials), max_trials, trials_step))
+        except:
+            trials = Trials()
+        best = fmin(self.objective,
+                    self.space,
+                    algo=tpe.suggest,
+                    max_evals=max_trials,
+                    trials=trials,
+                    verbose=True)
+        print("Best:", best)
+
+        #   with open(_model + ".hyperopt", "wb") as f:
+        # pickle.dump(trials, f)
+        with open("../output/my_model.hyperopt", "wb") as f:
+            pickle.dump(trials, f)
+
+    def inf_search(self):
+        try:
+            while True:
+                self.run_trials()
+        except KeyboardInterrupt:
+            pass
+            

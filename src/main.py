@@ -64,7 +64,8 @@ def main():
     y = data['train'][1]
     y = y.apply(lambda x: 0 if x == 2 else x)
     search = om.Search(model, space, X, y)
-    search.run()
+    #search.run()
+    search.inf_search()
     print(search.space)
     print('End\n')
 
