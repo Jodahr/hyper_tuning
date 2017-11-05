@@ -66,7 +66,7 @@ def main():
     search = om.Search(model, space, X, y)
     #search.run()
     search.inf_search()
-    print(search.space)
+    #print(search.space)
     print('End\n')
 
 

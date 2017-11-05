@@ -19,5 +19,12 @@
 	      "max": 50,
 	      "step": 1
       }
+  },
+  "rf__n_estimators": {
+    "type": "randrange",
+    "value": {"min": 60,
+	      "max": 100,
+	      "step": 1
+      }
   }
 }

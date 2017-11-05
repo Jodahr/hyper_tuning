@@ -36,7 +36,14 @@ def parameterSpace(paramsFile):
             stepsize = option['value']['step']
             space[parameter] = minimum + (
                 stepsize * hp.randint(parameter,
-                                      (maximum - minimum) / stepsize + 1))
+                                      (maximum - minimum) // stepsize + 1))
+            print("hello")
+        elif option['type'] == 'randrange':
+            minimum = option['value']['min']
+            maximum = option['value']['max']
+            stepsize = option['value']['step']
+            values = [x for x in range(minimum, maximum+1, stepsize)]
+            space[parameter] = hp.choice(parameter, values)
             print("hello")
         else:
             print("option not recognized.", file=sys.stderr)
