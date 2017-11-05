@@ -26,16 +26,17 @@ def parameterSpace(paramsFile):
         if option['type'] == 'choice':
             print(option['value'])
             space[parameter] = hp.choice(parameter, option['value'])
-            #space['rf__criterion'] = hp.choice('rf__criterion', ['gini', 'entropy'])
         elif option['type'] == 'uniform':
             print(option['value'])
             #space[parameter] = hp.uniform(parameter, option['value'][0],
             #                              option['value'][1])
         elif option['type'] == 'randint':
-            space[parameter] = 1 + hp.randint(parameter,
-                                          option['value'][1])
-            #space[parameter] = 2 + hp.randint(parameter,
-            #                              5)
+            minimum = option['value']['min']
+            maximum = option['value']['max']
+            stepsize = option['value']['step']
+            space[parameter] = minimum + (
+                stepsize * hp.randint(parameter,
+                                      (maximum - minimum) / stepsize + 1))
             print("hello")
         else:
             print("option not recognized.", file=sys.stderr)
