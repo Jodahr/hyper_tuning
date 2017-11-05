@@ -42,3 +42,5 @@ The remaining congifs can be set in a init file.
 * use more OOP instead of so many functions
 * filename for hyperopt trial object needs to be changed when input is changed; so, use argparser for that purpose
 * change your print commands to print to stderr or logger
+* add a HACKING file for your ideas
+* add a option to train the model after all iterations are done; not just when you quit the session with CTRL+C
