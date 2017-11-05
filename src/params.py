@@ -4,6 +4,7 @@ import pprint
 from hyperopt import hp
 import sys
 import parameter_space as ps
+import numpy as np
 
 
 def loadModel(modelpath):
@@ -30,6 +31,12 @@ def parameterSpace(paramsFile):
             print(option['value'])
             space[parameter] = hp.uniform(parameter, option['value'][0],
                                           option['value'][1])
+        elif option['type'] == 'loguniform':
+            minimum = option['value'][0]
+            maximum = option['value'][1]
+            space[parameter] = hp.loguniform(parameter,
+                                             np.log10(minimum)*np.log(10),
+                                             np.log10(maximum)*np.log(10))
         elif option['type'] == 'randint':
             minimum = option['value']['min']
             maximum = option['value']['max']
