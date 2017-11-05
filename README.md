@@ -23,3 +23,9 @@ The remaining congifs can be set in a init file.
 * ...
 * first we add options for hyperopt itself
 * hyperopt-sklearn will be added later
+
+
+## Credit for Code snippets goes to:
+
+* https://github.com/hyperopt/hyperopt/issues/267
+* https://github.com/steventhornton/Hyperparameter-Tuning-with-hyperopt-in-Python
