@@ -6,25 +6,40 @@
       "entropy"
     ]
   },
-  "rf__max_features": {
-    "type": "uniform",
+  "rf__bootstrap": {
+    "type": "choice",
     "value": [
-      0.33,
-      1.00
+      true,
+      false
     ]
   },
   "rf__min_samples_leaf": {
     "type": "loguniform",
     "value": [
-      1e-3,
-      1e-1
+      0.001,
+      0.5
+    ]
+  },
+  "rf__min_impurity_decrease": {
+    "type": "loguniform",
+    "value": [
+      0.001,
+      0.1
+    ]
+  },
+    "rf__min_samples_split": {
+    "type": "loguniform",
+    "value": [
+      0.001,
+      0.1
     ]
   },
   "rf__n_estimators": {
     "type": "randrange",
-    "value": {"min": 60,
-	      "max": 100,
-	      "step": 1
-      }
+    "value": {
+      "min": 60,
+      "max": 100,
+      "step": 1
+    }
   }
 }
