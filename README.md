@@ -13,8 +13,8 @@ This program can be used to tune different machine learning models.
 
 It will use hyperopt to optimize different scores like roc_auc, etc.
 All you need is a model pipeline object saved in pkl format and the input data.
-Afterwards you can config your model parameters and the search space in a json file.
-The remaining congifs can be set in a init file.
+Afterwards ,you can config your model parameters and the search space in a json file.
+The remaining configs can be set in an init file.
 
 ## starting point:
 * load data, model and creating init file
