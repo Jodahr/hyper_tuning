@@ -44,3 +44,13 @@ The remaining configs can be set in an init file.
 * change your print commands to print to stderr or logger
 * add a HACKING file for your ideas
 * add a option to train the model after all iterations are done; not just when you quit the session with CTRL+C
+* nested cross validation
+* generalize for multiclass and regression
+* generalize for unsupervised learning
+* save retrained models
+* add summary metric results
+* add templates for stacking models, etching
+* add option to create empty parameterdict
+* reconsider init and paramsinput
+* test for house pricing and a classification model
+* add hyperopt unlearn options
