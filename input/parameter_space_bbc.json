@@ -1,0 +1,47 @@
+{
+  "bbc__base_estimator__criterion": {
+    "type": "choice",
+    "value": [
+      "gini",
+      "entropy"
+    ]
+  },
+  "bbc__base_estimator__bootstrap": {
+    "type": "choice",
+    "value": [
+      true
+    ]
+  },
+  "bbc__base_estimator__min_samples_leaf": {
+    "type": "randrange",
+    "value":{
+      "min": 1,
+      "max": 10,
+      "step": 1
+    } 
+  },
+    "bbc__base_estimator__min_samples_split": {
+    "type": "randrange",
+    "value": {
+      "min": 10,
+      "max": 40,
+      "step": 1
+    }
+  },
+  "bbc__base_estimator__n_estimators": {
+    "type": "randrange",
+    "value": {
+      "min": 20,
+      "max": 20,
+      "step": 1
+    }
+  },
+  "bbc__base_estimator__n_jobs": {
+    "type": "randrange",
+    "value": {
+      "min": 6,
+      "max": 6,
+      "step": 1
+    }
+  }
+}

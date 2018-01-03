@@ -1,44 +1,55 @@
-{
-  "rf__criterion": {
-    "type": "choice",
-    "value": [
-      "gini",
-      "entropy"
-    ]
+{  "bbc__base_estimator__min_samples_leaf": {
+    "type": "randrange",
+    "value":{
+      "min": 1,
+      "max": 5,
+      "step": 1
+    } 
   },
-  "rf__bootstrap": {
-    "type": "choice",
-    "value": [
-      true,
-      false
-    ]
+    "bbc__base_estimator__min_samples_split": {
+    "type": "randrange",
+    "value":{
+      "min": 2,
+      "max": 7,
+      "step": 1
+    } 
   },
-  "rf__min_samples_leaf": {
-    "type": "loguniform",
-    "value": [
-      0.001,
-      0.5
-    ]
-  },
-  "rf__min_impurity_decrease": {
-    "type": "loguniform",
-    "value": [
-      0.001,
-      0.1
-    ]
-  },
-    "rf__min_samples_split": {
-    "type": "loguniform",
-    "value": [
-      0.001,
-      0.1
-    ]
-  },
-  "rf__n_estimators": {
+    "bbc__base_estimator__max_depth": {
     "type": "randrange",
     "value": {
-      "min": 2000,
-      "max": 2000,
+      "min": 1,
+      "max": 10,
+      "step": 1
+    }
+  },
+  "bbc__base_estimator__n_estimators": {
+    "type": "randrange",
+    "value": {
+      "min": 200,
+      "max": 200,
+      "step": 1
+    }
+  },
+    "bbc__n_estimators": {
+    "type": "randrange",
+    "value": {
+      "min": 100,
+      "max": 100,
+      "step": 1
+    }
+    },
+    "bbc__base_estimator__learning_rate": {
+    "type": "loguniform",
+    "value": [
+      0.001,
+      10.0
+    ]
+  },
+  "bbc__n_jobs": {
+    "type": "randrange",
+    "value": {
+      "min": 5,
+      "max": 5,
       "step": 1
     }
   }

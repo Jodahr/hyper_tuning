@@ -1,12 +1,13 @@
 # import params as pm
 from sklearn.model_selection import cross_val_score, KFold
-from hyperopt import fmin, tpe, Trials, space_eval
+from hyperopt import fmin, tpe, Trials, space_eval, rand, anneal, mix, partial
 import pickle
 from sklearn.metrics import roc_auc_score
 import numpy as np
 from geographiclib.geodesic import Geodesic
 import math
 geod = Geodesic.WGS84
+import logging
 
 
 class Search:
@@ -34,9 +35,16 @@ class Search:
 
     def run(self):
         self.trials = Trials()
+
+        mix_algo = partial(mix.suggest, p_suggest=[
+            (0.1, rand.suggest),
+            (0.2, anneal.suggest),
+            (0.7, tpe.suggest)
+        ])
+
         self.best = fmin(self.objective,
                          self.space,
-                         algo=tpe.suggest,
+                         algo=mix_algo,
                          max_evals=50,
                          trials=self.trials,
                          verbose=True)
@@ -49,7 +57,7 @@ class Search:
         trials_step = 1
         max_trials = 3
         try:
-            self.trials = pickle.load(open("../output/my_model.hyperopt",
+            self.trials = pickle.load(open("../output/my_model_gb_bbc3.hyperopt",
                                       "rb"))
             print("found and load\n")
             max_trials = len(self.trials.trials) + trials_step
@@ -65,13 +73,13 @@ class Search:
                          verbose=True)
         #print("Best:", self.best)
         self.best_params = space_eval(self.space, self.best)
-
+        logging.debug('best params\n: {} \n'.format(self.best_params))
         #   with open(_model + ".hyperopt", "wb") as f:
         # pickle.dump(trials, f)
-        with open("../output/my_model.hyperopt", "wb") as f:
+        with open("../output/my_model_gb_bbc3.hyperopt", "wb") as f:
             pickle.dump(self.trials, f)
 
-    def inf_search(self, n=200):
+    def inf_search(self, n=100):
         try:
             i = 0
             while i < n:

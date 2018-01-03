@@ -1,0 +1,47 @@
+{
+  "rf__criterion": {
+    "type": "choice",
+    "value": [
+      "gini",
+      "entropy"
+    ]
+  },
+  "rf__bootstrap": {
+    "type": "choice",
+    "value": [
+      true
+    ]
+  },
+  "rf__min_samples_leaf": {
+    "type": "randrange",
+    "value":{
+      "min": 1,
+      "max": 10,
+      "step": 1
+    } 
+  },
+    "rf__min_samples_split": {
+    "type": "randrange",
+    "value": {
+      "min": 10,
+      "max": 40,
+      "step": 1
+    }
+  },
+  "rf__n_estimators": {
+    "type": "randrange",
+    "value": {
+      "min": 2000,
+      "max": 2000,
+      "step": 1
+    }
+  },
+  "rf__n_jobs": {
+    "type": "randrange",
+    "value": {
+      "min": 6,
+      "max": 6,
+      "step": 1
+    }
+  }
+}

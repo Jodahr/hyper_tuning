@@ -2,25 +2,10 @@
 import sys
 import argparse
 import configparser
-import logging
-import params as pm
-import data as d
-import optimize as om
-from sklearn.preprocessing import LabelBinarizer
-import numpy as np
-from geographiclib.geodesic import Geodesic
-import math
-geod = Geodesic.WGS84
-
-
-# parser (still needs to be finalized)
-def parse():
-    parser = argparse.ArgumentParser(description='my parser')
-    parser.add_argument('task', type=str, help='choose between tasks')
-    parser.add_argument('-m', '--modelname', default=None, type=str,
-                        help='a name for your model')
-    args = parser.parse_args()
-    return args
+import json
+from importlib import import_module
+import lib.utils as ut
+import search
 
 
 def configSectionMap(config, section):
@@ -41,47 +26,38 @@ def getConfigs():
     config = configparser.ConfigParser()
     config.read("../config/hyper_tuning.ini")
     print(config.sections())
-    configDict = {}
-    configDict['dataPath'] = configSectionMap(config, "Paths")['data']
-    configDict['modelPath'] = configSectionMap(config, "Paths")['model']
-    configDict['dataType'] = configSectionMap(config, "Data")['type']
-    configDict['dataLabel'] = configSectionMap(config, "Data")['label']
-    configDict['dataFormat'] = configSectionMap(config, "Data")['format']
-    configDict['classification'] = configSectionMap(config,
-                                                    "Data")['classification']
-    return configDict
+    print(config.values())
+    #configDict = {}
+    #configDict['dataPath'] = configSectionMap(config, "Paths")['data']
+    #configDict['modelPath'] = configSectionMap(config, "Paths")['model']
+    #configDict['dataType'] = configSectionMap(config, "Data")['type']
+    #configDict['dataLabel'] = configSectionMap(config, "Data")['label']
+    #configDict['dataFormat'] = configSectionMap(config, "Data")['format']
+    #configDict['classification'] = configSectionMap(config,
+    #                                                "Data")['classification']
+    #return configDict
+
+def importModules(importList):
+    for element in importList:
+        if not element['alias']:
+            globals()[element['name']] = import_module(name=element['name'])
+        else:
+            globals()[element['alias']] = import_module(name=element['name'])
 
 
-# all executable code goes here
 def main():
-    #parse()
-    configDict = getConfigs()
-    modelPath = configDict['modelPath']
-    model = pm.loadModel(modelPath)
-    dataPath = configDict['dataPath']
-    label = configDict['dataLabel']
-    dataFormat = configDict['dataFormat']
-    classification = configDict['classification']
-    data = d.getData(dataPath, label)
-    # print(data['train'][0])
-    # pm.printModelParams(model)
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s - %(levelname)s - %(message)s')
-    logging.debug('This is a log message.')
-    space = pm.parameterSpace("../input/parameter_space.json")
-    X = data['train'][0]
-    y = data['train'][1]
-    X_test = data['test'][0]
-    y_test = data['test'][1]
-    if classification == 'multiclass':
-        y = LabelBinarizer().fit_transform(y)
-        y_test = LabelBinarizer().fit_transform(y_test)
-    y = y.apply(lambda x: 0 if x == 2 else x)  # for binary classification
-    y_test = y_test.apply(lambda x: 0 if x == 2 else x)  # for binary classification
-    search = om.Search(model, space, X, y, X_test, y_test)
-    #search.run()
-    search.inf_search()
-    #print(search.space)
+    test2 = search.Search(model='bla', paramSpace='blubb', data='bla')
+    fmin = search.Fmin(model='bla',X='x', y='y', scoring='roc_auc', shuffe=False)
+    fmin.__fmin__()
+    #test2.objective()
+    utils = ut.Utils()
+    utils.parse()
+    config = configparser.ConfigParser()
+    config.read("../config/hyper_tuning.ini")
+    test = json.loads(config.get("Modules", "importList"))
+    importModules(test)
+    print(test)
+    getConfigs()
     print('End\n')
 
 
