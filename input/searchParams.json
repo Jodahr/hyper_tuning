@@ -1,0 +1,4 @@
+{  "iterations": 100,
+   "KFolds": 5,
+   "scoring": "roc_auc"
+} 
