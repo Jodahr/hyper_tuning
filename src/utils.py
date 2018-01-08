@@ -1,9 +1,8 @@
 import argparse
-import configparser
 from importlib import import_module
 import pprint
 import dill
-
+import pandas as pd
 
 def parse():
     parser = argparse.ArgumentParser()
@@ -23,7 +22,6 @@ def parse():
 
 def configSectionMap(config, section):
     configDict = {}
-    config = configparser.ConfigParser()
     options = config.options(section)
     for option in options:
         configDict[option] = config.get(section, option)
@@ -31,14 +29,20 @@ def configSectionMap(config, section):
 
 
 def loadModules(moduleList):
+    globals()["name"] = "Marcel"
     for mod in moduleList:
-        print("load module {}...".format(mod))
-        if not mod['alias']:
+        print("load module {}...".format(mod["name"]))
+        if not mod['alias'] and not mod['package']:
             globals()[mod['name']] = import_module(name=mod['name'],
+                                                   package=mod['package'])
+        if not mod['alias']:
+            globals()[mod['package']] = import_module(name=mod['name'],
                                                    package=mod['package'])
         else:
             globals()[mod['alias']] = import_module(name=mod['name'],
                                                     package=mod['package'])
+        print("...done\n")
+    return globals()
 
 
 def printModelParams(model):
@@ -57,3 +61,14 @@ def loadObject(objectPath):
 def saveObject(objectPath):
     with open(objectPath, 'wb') as f:
         dill.dump(f)
+
+
+def printBanner():
+    print("Welcome to HyperTuning.\n")
+
+
+def getData(dataPath, label):
+    data = dill.load(open(dataPath, 'rb'))
+    y = data[label]
+    X = data.drop(label, axis=1)
+    return (X, y)

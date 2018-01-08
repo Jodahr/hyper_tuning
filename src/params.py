@@ -1,30 +1,16 @@
-from sklearn.externals import joblib
 import json
-import pprint
 from hyperopt import hp
-import sys
-import parameter_space as ps
 import numpy as np
-import dill
+import sys
 
 
-def loadModel(modelpath):
-    # model = joblib.load(modelpath)
-    model = dill.load(open(modelpath, 'rb'))
-    return model
-    
-
-def printModelParams(model):
-    modelDict = model.get_params()
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(modelDict)
-#    print(json.dumps(str(modelDict), indent=2))
-
-
-def parameterSpace(paramsFile):
+def getParameterSpace(paramsFile):
+    # empty dict holding the parameterSpace
     space = {}
+
     with open(paramsFile) as data_file:
         paramsDict = json.load(data_file)
+
     for parameter, option in paramsDict.items():
         if option['type'] == 'choice':
             print(option['value'])
@@ -56,6 +42,4 @@ def parameterSpace(paramsFile):
             print("hello")
         else:
             print("option not recognized.", file=sys.stderr)
-    # add some flag to use it
-    #space = ps.complexSpace(space)
     return space

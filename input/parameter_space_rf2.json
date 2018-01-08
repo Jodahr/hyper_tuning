@@ -31,8 +31,8 @@
   "rf__n_estimators": {
     "type": "randrange",
     "value": {
-      "min": 2000,
-      "max": 2000,
+      "min": 10,
+      "max": 10,
       "step": 1
     }
   },
